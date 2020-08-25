@@ -1,2 +1,2 @@
-# accessible-js-based-vue-masonry-infinite-scroll
+# accessible-js-based-vue-masonry
 Created with CodeSandbox
