@@ -10,7 +10,8 @@
   "dependencies": {
     "@vue/cli-plugin-babel": "4.1.1",
     "faker": "5.0.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-infinite-loading": "2.4.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "4.1.1",

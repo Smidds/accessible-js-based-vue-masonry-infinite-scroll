@@ -2,7 +2,7 @@
   <div id="app">
     <div class="header">
       <h1 class="title">Accessible JavaScript based Masonry Layout in Vue.js</h1>
-      <button class="add-more" @click="addMoreItems(100)">Add more items</button>
+      <p class="new">Now with infinite scrolling!</p>
     </div>
     <div class="layout-container">
       <MasonryLayout gutter="20px" ref="layout" :minColWidth="560">
@@ -14,6 +14,7 @@
           :description="item.description"
         />
       </MasonryLayout>
+      <infinite-loading @infinite="addMoreItems"></infinite-loading>
     </div>
   </div>
 </template>
@@ -21,18 +22,20 @@
 <script>
 import faker from "faker";
 
+import InfiniteLoading from "vue-infinite-loading";
 import MasonryLayout from "./components/masonry-layout";
 import Card from "./components/card";
 
 export default {
   name: "App",
   components: {
+    InfiniteLoading,
     MasonryLayout,
     Card
   },
   data() {
     return {
-      items: [...new Array(500)].map(this.createItem)
+      items: [...new Array(10)].map(this.createItem)
     };
   },
   methods: {
@@ -42,9 +45,10 @@ export default {
         description: faker.lorem.paragraphs(Math.floor(Math.random() * 4) + 1)
       };
     },
-    addMoreItems(amountToAdd) {
-      this.items.push(...[...new Array(amountToAdd)].map(this.createItem));
+    addMoreItems($state) {
+      this.items.push(...[...new Array(20)].map(this.createItem));
       this.$nextTick(() => {
+        $state.loaded();
         this.$refs.layout.refreshLayout();
       });
     }
@@ -101,5 +105,9 @@ html {
 .title {
   font-size: 25px;
   margin: 0;
+}
+
+.new {
+  font-style: italic;
 }
 </style>
